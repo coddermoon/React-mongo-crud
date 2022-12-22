@@ -1,5 +1,6 @@
 
 import { useEffect, useState } from 'react';
+import { toast } from 'react-hot-toast';
 import './App.css';
 import Form from './Components/Form/Form';
 
@@ -30,6 +31,7 @@ const [data,setData]= useState([])
     .then(data=>{
       const remaining = data.filter(odr => odr._id !== id);
       setData(remaining)
+      toast.success('Deleted order')
     })
 
   }
@@ -47,7 +49,7 @@ const [data,setData]= useState([])
      
       </div>
 
-
+      
      
       
     </div>

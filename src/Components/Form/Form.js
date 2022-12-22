@@ -1,4 +1,5 @@
 import React from 'react';
+import { toast } from 'react-hot-toast';
 
 
 const Form = () => {
@@ -25,7 +26,7 @@ fetch(`https://crud-server-fawn.vercel.app/uploadData`,{
   body: JSON.stringify(data),
 })
 .then(res=>res.json())
-.then(data=>console.log(data))
+.then(data=>toast.success('added data'))
 .catch(err=>console.error(err.message))
 
   }
@@ -34,10 +35,10 @@ fetch(`https://crud-server-fawn.vercel.app/uploadData`,{
     return (
       <div>
        <form onSubmit={handleForm} class="flex shadow-2xl py-10 flex-col px-1 md:px-10 gap-y-5 " action="">
-   <input required="" type="text" name="name" placeholder="Your Name" class="input border rounded border-gray-300 input-bordered bg-transparent w-full p-2"/>
-   <select  name="service" required="" class="select select-bordered py-2 bg-slate-800 w-full ">
+   <input required="true" type="text" name="name" placeholder="Your Name" class="input border rounded border-gray-300 input-bordered bg-transparent w-full p-2"/>
+   <select  name="service" required='true' class="select select-bordered py-2 bg-slate-800 w-full ">
    
-      <option disabled>Select Sector</option>
+      <option disabled >Select Sector</option>
       <option>Manufacturing</option>
       <option>Construction materials</option>
       <option>Electronics and Optics</option>
@@ -113,7 +114,7 @@ fetch(`https://crud-server-fawn.vercel.app/uploadData`,{
       <option>Road</option>
       <option>Water</option>
    </select>
-   <div class="flex items-center gap-2"><input required="" type="checkbox" class="checkbox checkbox-primary"/><span class="label-text">Agree the Terms</span></div>
+   <div class="flex items-center gap-2"><input required="true" type="checkbox"  class="checkbox checkbox-primary"/><span class="label-text">Agree the Terms</span></div>
    <button type="submit" class="btn bg-blue-600 py-2 hover:bg-blue-700 w-full">Save</button>
 </form>
       </div>

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { toast } from "react-hot-toast";
 
 
 const Output = ({data,handleDelete}) => {
@@ -14,7 +15,7 @@ const handleSubmit = (e)=>{
 
 
 
-fetch(`http://localhost:5000/upload/${id}`,{    method: 'PUT',
+fetch(`https://crud-server-fawn.vercel.app/upload/${id}`,{    method: 'PATCH',
     headers:{
         'content-type': 'application/json',
     },
@@ -24,6 +25,7 @@ fetch(`http://localhost:5000/upload/${id}`,{    method: 'PUT',
 .then(res=>res.json())
 .then(data=>{
     if(data.modifiedCount > 0){
+        toast.success('Updated successfully')
         isUpdate(false)
     }
 })
