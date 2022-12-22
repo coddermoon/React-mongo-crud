@@ -2,12 +2,42 @@ import React from 'react';
 
 
 const Form = () => {
+
+  const handleForm = (e) => {
+
+e.preventDefault()
+
+const form = e.target
+
+const name = form.name.value
+const service = form.service.value
+
+const data = {
+  name,
+  service
+}
+
+fetch(`https://crud-server-fawn.vercel.app/uploadData`,{
+  method: 'POST',
+  headers:{
+    'content-type':'application/json'
+  },
+  body: JSON.stringify(data),
+})
+.then(res=>res.json())
+.then(data=>console.log(data))
+.catch(err=>console.error(err.message))
+
+  }
+
+
     return (
       <div>
-       <form class="flex shadow-2xl py-10 flex-col px-1 md:px-10 gap-y-5 " action="">
+       <form onSubmit={handleForm} class="flex shadow-2xl py-10 flex-col px-1 md:px-10 gap-y-5 " action="">
    <input required="" type="text" name="name" placeholder="Your Name" class="input border rounded border-gray-300 input-bordered bg-transparent w-full p-2"/>
-   <select name="select" required="" class="select select-bordered py-2 bg-slate-800 w-full ">
-      <option disabled="">Select Sector</option>
+   <select  name="service" required="" class="select select-bordered py-2 bg-slate-800 w-full ">
+   
+      <option disabled>Select Sector</option>
       <option>Manufacturing</option>
       <option>Construction materials</option>
       <option>Electronics and Optics</option>
