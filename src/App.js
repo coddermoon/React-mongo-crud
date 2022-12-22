@@ -3,10 +3,16 @@ import { useEffect, useState } from 'react';
 import './App.css';
 import Form from './Components/Form/Form';
 
+
 import Output from './Components/Output';
 
 function App() {
 const [data,setData]= useState([])
+
+// modal functionality
+
+
+
   // load data
 
   useEffect(()=>{
@@ -36,9 +42,13 @@ const [data,setData]= useState([])
       <Output
       data= {data}
       handleDelete= {handleDelete}
+    
       />
      
       </div>
+
+
+     
       
     </div>
   );

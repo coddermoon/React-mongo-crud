@@ -4,7 +4,7 @@ import { Fragment} from 'react'
 
 const Modal = ({isOpen,closeModal,id}) => {
    
-   
+   console.log(id)
     const handleUpdate = ()=>{
 
        

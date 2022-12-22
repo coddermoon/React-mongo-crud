@@ -1,22 +1,41 @@
 import React, { useState } from "react";
-import Modal from "./MOdal/Modal";
+
 
 const Output = ({data,handleDelete}) => {
-    const [id,setId] = useState('')
-    let [isOpen, setIsOpen] = useState(false)
-  function closeModal() {
-    setIsOpen(false)
-  }
 
-  function openModal(id) {
+const [ update,isUpdate] = useState(false)
+    const [id,setId]= useState('')
+
+const handleSubmit = (e)=>{
+
+    e.preventDefault()
+
+    const name = e.target.name.value
+
+
+
+fetch(`http://localhost:5000/upload/${id}`,{    method: 'PUT',
+    headers:{
+        'content-type': 'application/json',
+    },
+    body:JSON.stringify({name})
+
+})
+.then(res=>res.json())
+.then(data=>{
+    if(data.modifiedCount > 0){
+        isUpdate(false)
+    }
+})
+
+}
+
+const handleUpdate = (id) => {
     setId(id)
-    setIsOpen(true)
+    isUpdate(true)
 
 
-  }
-
-
-
+}
 
 
 
@@ -37,7 +56,9 @@ const Output = ({data,handleDelete}) => {
 
 {
     data.map(tr=>  <tr className=" py-8 text-white text-center bg-slate-800 shadow-md">
-    <td className="py-3">{tr.name}</td>
+    <td className="py-3">{ update && id === tr._id ? <form onSubmit={handleSubmit}>
+        <input name='name'  className="bg-slate-600 p-1 " defaultValue={tr.name} />
+    </form> : tr.name }</td>
     <td>{tr.service}</td>
 
     <td className=" ">
@@ -57,7 +78,7 @@ const Output = ({data,handleDelete}) => {
           ></path>
         </svg>
       </button>
-      <button  onClick={()=>openModal(tr._id)}>
+      <button  onClick={()=>handleUpdate(tr._id)}>
         <label for="editData">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -75,6 +96,7 @@ const Output = ({data,handleDelete}) => {
           </svg>
         </label>
       </button>
+      {/* <button className={`bg-red-900 ${!update && id === tr._id  ? 'hidden' : 'block'} py-2`}>test btn</button> */}
 
 
     </td>
@@ -86,15 +108,7 @@ const Output = ({data,handleDelete}) => {
         </table>
       </div>
 
-      {
-        isOpen &&   
-            <Modal
-        isOpen={isOpen}
-        closeModal={closeModal}
-        id={id}
 
-        />
-      }
 
     </div>
   );
