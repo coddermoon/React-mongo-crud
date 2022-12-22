@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import Form from './Components/Form/Form';
+
 import Output from './Components/Output';
 
 function App() {
@@ -36,6 +37,7 @@ const [data,setData]= useState([])
       data= {data}
       handleDelete= {handleDelete}
       />
+     
       </div>
       
     </div>

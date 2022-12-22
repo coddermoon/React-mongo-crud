@@ -1,15 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
+import Modal from "./MOdal/Modal";
 
 const Output = ({data,handleDelete}) => {
+    const [id,setId] = useState('')
+    let [isOpen, setIsOpen] = useState(false)
+  function closeModal() {
+    setIsOpen(false)
+  }
+
+  function openModal(id) {
+    setId(id)
+    setIsOpen(true)
 
 
-    const handleUpdate = () => {}
+  }
+
+
+
+
+
 
 
   return (
-    <div className="px-1 py-5 md:px-10">
+    <div className="px-1 py-5 md:px-10 mx-auto">
       <div className="table shadow-2xl">
-        <table className="p-2 w-[600px] ">
+        <table className="p-2 w-[600px] mx-auto ">
           <thead className="p-[25px]">
             <tr className="bg-slate-900 py-8 text-white">
               <th className="py-2">Name</th>
@@ -42,7 +57,7 @@ const Output = ({data,handleDelete}) => {
           ></path>
         </svg>
       </button>
-      <button onClick={()=>handleUpdate(tr._id)}>
+      <button  onClick={()=>openModal(tr._id)}>
         <label for="editData">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -60,6 +75,8 @@ const Output = ({data,handleDelete}) => {
           </svg>
         </label>
       </button>
+
+
     </td>
   </tr> )
 }
@@ -68,6 +85,17 @@ const Output = ({data,handleDelete}) => {
           </tbody>
         </table>
       </div>
+
+      {
+        isOpen &&   
+            <Modal
+        isOpen={isOpen}
+        closeModal={closeModal}
+        id={id}
+
+        />
+      }
+
     </div>
   );
 };
